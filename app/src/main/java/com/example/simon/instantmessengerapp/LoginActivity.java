@@ -25,4 +25,7 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void startRegister(View view) {
+    }
+
 }
