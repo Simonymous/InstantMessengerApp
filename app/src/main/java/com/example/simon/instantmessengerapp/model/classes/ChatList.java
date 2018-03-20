@@ -1,7 +1,7 @@
-package com.example.simon.instantmessengerapp.model.interfaces.classes;
+package com.example.simon.instantmessengerapp.model.classes;
 
 import com.example.simon.instantmessengerapp.model.interfaces.Group;
-import com.example.simon.instantmessengerapp.model.interfaces.classes.Chat;
+import com.example.simon.instantmessengerapp.model.classes.Chat;
 
 import java.util.ArrayList;
 import java.util.List;

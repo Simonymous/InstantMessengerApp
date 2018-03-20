@@ -1,4 +1,4 @@
-package com.example.simon.instantmessengerapp.model.interfaces.classes;
+package com.example.simon.instantmessengerapp.model.classes;
 
 import com.example.simon.instantmessengerapp.model.interfaces.Group;
 

@@ -1,4 +1,4 @@
-package com.example.simon.instantmessengerapp.model.interfaces.classes;
+package com.example.simon.instantmessengerapp.model.classes;
 
 import com.example.simon.instantmessengerapp.model.interfaces.Group;
 import com.example.simon.instantmessengerapp.model.interfaces.Message;
@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class Chat {
     private int id;
     private String name;
-    ArrayList<MessageImpl> messageList;
+    ArrayList<Message> messageList;
 
     public Chat(Group group) {
         id = group.getGroupId();
@@ -22,11 +22,11 @@ public class Chat {
         return false;
     }
 
-    public void addMessage(MessageImpl m) {
+    public void addMessage(Message m) {
         messageList.add(m);
     }
 
-    public ArrayList<MessageImpl> getMessageList() {
+    public ArrayList<Message> getMessageList() {
         return messageList;
     }
 
