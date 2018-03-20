@@ -1,4 +1,4 @@
-package com.example.simon.instantmessengerapp.database.ContentValue;
+package com.example.simon.instantmessengerapp.database.model;
 
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
