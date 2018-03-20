@@ -35,6 +35,7 @@ public class AddChatActivity extends AppCompatActivity {
                 groupValues.put(DatabaseHelper.GROUP_NAME_FIELD_NAME, groupName.getText().toString());
                 db.insert(DatabaseHelper.GROUP_TABLE_NAME, null, groupValues);
                 db.close();
+                finish();
             }
         });
     }
