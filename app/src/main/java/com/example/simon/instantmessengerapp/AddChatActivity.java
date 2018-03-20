@@ -14,6 +14,8 @@ import com.example.simon.instantmessengerapp.database.DatabaseHelper;
 public class AddChatActivity extends AppCompatActivity {
     EditText groupName;
 
+    Button addButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,28 +23,16 @@ public class AddChatActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         groupName = (EditText) findViewById(R.id.editText4);
         setSupportActionBar(toolbar);
-        addOnClickListener();
+        addButton = findViewById(R.id.addChatButton);
     }
 
-    public void addOnClickListener(){
-        Button button = findViewById(R.id.button8);
-
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                SQLiteDatabase db = new DatabaseHelper(view.getContext()).getReadableDatabase();
-                ContentValues groupValues = new ContentValues();
-                groupValues.put(DatabaseHelper.GROUP_NAME_FIELD_NAME, groupName.getText().toString());
-                db.insert(DatabaseHelper.GROUP_TABLE_NAME, null, groupValues);
-                db.close();
-                finish();
-            }
-        });
-    }
 
     public void addGroup(View view) {
-
-
+        SQLiteDatabase db = new DatabaseHelper(view.getContext()).getReadableDatabase();
+        ContentValues groupValues = new ContentValues();
+        groupValues.put(DatabaseHelper.GROUP_NAME_FIELD_NAME, groupName.getText().toString());
+        db.insert(DatabaseHelper.GROUP_TABLE_NAME, null, groupValues);
+        db.close();
         finish();
     }
 }

@@ -1,13 +1,40 @@
 package com.example.simon.instantmessengerapp;
 
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.ListView;
+
+import com.example.simon.instantmessengerapp.database.DatabaseHelper;
+import com.example.simon.instantmessengerapp.database.adapter.MessageCursorAdapter;
 
 public class ChatViewActivity extends AppCompatActivity {
+    private ListView messageListView;
+    private MessageCursorAdapter messageCursorAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_view);
+
+        messageListView = (ListView) findViewById(R.id.chatListview);
+
+        populateListView();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        populateListView();
+    }
+
+    private void populateListView() {
+        SQLiteDatabase db = new DatabaseHelper(this).getReadableDatabase();
+        Cursor result  = db.query(DatabaseHelper.MESSAGE_TABLE_NAME, null, null, null, null, null, null, null);
+        messageCursorAdapter = new MessageCursorAdapter(this, result);
+        messageListView.setAdapter(messageCursorAdapter);
+        //result.close();
+        db.close();
     }
 }

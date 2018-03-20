@@ -21,7 +21,6 @@ import com.example.simon.instantmessengerapp.database.DatabaseHelper;
 
 public class GroupViewActivity extends AppCompatActivity implements OnClickListener,OnItemClickListener {
     private ListView groupListView;
-    private ArrayAdapter<String> groupAdapter;
     private FloatingActionButton fab;
     private GroupCursorAdapter groupCursorAdapter;
 
@@ -78,9 +77,8 @@ public class GroupViewActivity extends AppCompatActivity implements OnClickListe
     private void populateListView() {
         SQLiteDatabase db = new DatabaseHelper(this).getReadableDatabase();
         Cursor result  = db.query(DatabaseHelper.GROUP_TABLE_NAME, null, null, null, null, null, null, null);
-        ListView lvGroups = (ListView) findViewById(R.id.groupListView);
         groupCursorAdapter = new GroupCursorAdapter(this, result);
-        lvGroups.setAdapter(groupCursorAdapter);
+        groupListView.setAdapter(groupCursorAdapter);
         //result.close();
         db.close();
     }
