@@ -1,6 +1,7 @@
 package com.example.simon.instantmessengerapp;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -67,8 +68,7 @@ public class GroupViewActivity extends AppCompatActivity implements OnClickListe
     }
 
     public void populateListView() {
-
-
+        
     }
 
 }

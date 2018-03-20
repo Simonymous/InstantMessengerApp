@@ -1,6 +1,10 @@
 package com.example.simon.instantmessengerapp.database;
 
+import android.content.Context;
+import android.database.SQLException;
+import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 /**
  * Created by Christian on 20.03.2018.
@@ -42,7 +46,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     private static final String USER_TABLE_CREATE =
             "CREATE TABLE " + USER_TABLE_NAME + "( "
             + USER_ID_FIELD_NAME + " " + USER_ID_FIELD_TYP + " NOT NULL , "
-            + USER_NAME_FIELD_NAME + " " + USER_ID_FIELD_TYP + " NOT NULL UNIQUE , "
+            + USER_NAME_FIELD_NAME + " " + USER_NAME_FIELD_TYP + " NOT NULL UNIQUE , "
             + " PRIMARY KEY ( " + USER_ID_FIELD_NAME + " ) );";
 
     /**
@@ -80,4 +84,28 @@ public class DatabaseHelper extends SQLiteOpenHelper{
                     + "FOREIGN KEY( " + MESSAGE_SENDER_FIELD_NAME + " ) " + " REFERENCES "
                     + USER_TABLE_NAME + "(" + USER_ID_FIELD_NAME + " ), "
                     + " );";
+
+    public DatabaseHelper(Context context){
+        super( context, DATABASE_NAME, null, DATABASE_VERSION);
+    }
+
+    @Override
+    public void onCreate(SQLiteDatabase db){
+        try {
+
+        } catch (SQLException ex){
+            //TODO Fehlermeldungen auslagern
+            Log.e("DatabaseHelper", "error creating tables", ex);
+        }
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVer, int newVer){
+        //TODO implementieren
+    }
+
+    @Override
+    public void onDowngrade(SQLiteDatabase db, int oldVer, int newVer){
+        //TODO implementieren
+    }
 }
