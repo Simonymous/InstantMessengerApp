@@ -23,6 +23,7 @@ public class GroupViewActivity extends AppCompatActivity implements OnClickListe
     private ListView groupListView;
     private ArrayAdapter<String> groupAdapter;
     private FloatingActionButton fab;
+    private GroupCursorAdapter groupCursorAdapter;
 
 
     @Override
@@ -55,6 +56,12 @@ public class GroupViewActivity extends AppCompatActivity implements OnClickListe
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        populateListView();
+    }
+
+    @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         try {
             //TextView groupID = (TextView) view.findViewById(R.id.view_todo_id); Get Id of clicked Group
@@ -72,7 +79,7 @@ public class GroupViewActivity extends AppCompatActivity implements OnClickListe
         SQLiteDatabase db = new DatabaseHelper(this).getReadableDatabase();
         Cursor result  = db.query(DatabaseHelper.GROUP_TABLE_NAME, null, null, null, null, null, null, null);
         ListView lvGroups = (ListView) findViewById(R.id.groupListView);
-        GroupCursorAdapter groupCursorAdapter = new GroupCursorAdapter(this, result);
+        groupCursorAdapter = new GroupCursorAdapter(this, result);
         lvGroups.setAdapter(groupCursorAdapter);
         //result.close();
         db.close();
