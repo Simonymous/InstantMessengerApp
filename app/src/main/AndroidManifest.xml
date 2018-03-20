@@ -23,11 +23,12 @@
             android:name=".GroupViewActivity"
             android:label="@string/title_activity_group_view"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity
             android:name=".AddChatActivity"
-        android:label="@string/title_activity_group_view"
-        android:theme="@style/AppTheme.NoActionBar" />
+            android:label="@string/title_activity_group_view"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ChatViewActivity" />
+        <activity android:name=".RegisterActivity"></activity>
     </application>
 
 </manifest>

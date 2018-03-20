@@ -35,8 +35,8 @@ public class GroupViewActivity extends AppCompatActivity implements OnItemClickL
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(this, AddChatActivity.class);
-                startActivity(intent);
+                //Intent intent = new Intent(this, AddChatActivity.class);
+                //startActivity(intent);
             }
         });
 
