@@ -15,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.simon.instantmessengerapp.database.adapter.GroupCursorAdapter;
 import com.example.simon.instantmessengerapp.database.DatabaseHelper;
@@ -63,11 +64,10 @@ public class GroupViewActivity extends AppCompatActivity implements OnClickListe
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         try {
-            //TextView groupID = (TextView) view.findViewById(R.id.view_todo_id); Get Id of clicked Group
-            // int groupID_val = Integer.parseInt(groupID.getText().toString()); parse it to Itenger
+             TextView clickedItemGroupName = (TextView) view.findViewById(R.id.groupName); //Get Name of clicked group
 
              Intent modify_intent = new Intent(getApplicationContext(), ChatViewActivity.class);
-             //modify_intent.putExtra(groupID_val); //Deliver group id to new activity
+             modify_intent.putExtra((String)clickedItemGroupName.getText(),0); //Deliver group Name to new activity
              startActivity(modify_intent);
         } catch (NumberFormatException ex) {
             //Print Error
