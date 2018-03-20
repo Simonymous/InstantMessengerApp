@@ -16,5 +16,7 @@ public class AddChatActivity extends AppCompatActivity {
     }
 
     public void addGroup(View view) {
+        //Add Group
+        finish();
     }
 }

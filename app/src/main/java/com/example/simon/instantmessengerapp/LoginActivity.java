@@ -29,7 +29,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void startRegister(View view) {
-        //GroupList.getInstance().addGroup(new GroupImpl("Test231312"));
+        Intent intent = new Intent(this, RegisterActivity.class);
+        startActivity(intent);
     }
 
 }
