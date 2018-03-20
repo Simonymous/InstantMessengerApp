@@ -1,28 +1,24 @@
 package com.example.simon.instantmessengerapp;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
-import com.example.simon.instantmessengerapp.model.interfaces.classes.Chat;
-import com.example.simon.instantmessengerapp.model.interfaces.classes.ChatList;
+import com.example.simon.instantmessengerapp.model.classes.GroupImpl;
+import com.example.simon.instantmessengerapp.model.classes.GroupList;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class GroupViewActivity extends AppCompatActivity implements OnItemClickListener {
-    private ListView groupList;
+    private ListView groupListView;
     private ArrayAdapter<String> groupAdapter;
-    public ArrayList<String> items;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,20 +36,19 @@ public class GroupViewActivity extends AppCompatActivity implements OnItemClickL
             }
         });
 
-        groupList = (ListView) findViewById(R.id.groupListView);
+        groupListView = (ListView) findViewById(R.id.groupListView);
         populateListView();
 
-        groupList.setOnItemClickListener(this);
+        groupListView.setOnItemClickListener(this);
 
-    }
-
-    public void addChat(String name) {
-        items.add(name);
     }
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         try {
+            GroupList.getInstance().addGroup(new GroupImpl("Test234"));
+            Toast.makeText(getApplicationContext(), "Hallo", Toast.LENGTH_SHORT).show();
+
             //int todoID_val = Integer.parseInt(todoID.getText().toString()); Get Click View
 
             // Intent modify_intent = new Intent(getApplicationContext(), EditTodoActivity.class); Open Chat
@@ -64,15 +59,11 @@ public class GroupViewActivity extends AppCompatActivity implements OnItemClickL
     }
 
     public void populateListView() {
-        items = new ArrayList<>();
-
-        items.add("Test 1");
-        items.add("Test 2");
-        items.add("Test 3");
+        GroupList groupList = GroupList.getInstance();
 
         ArrayAdapter<String> itemsAdapter =
-                new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, items);
-        groupList.setAdapter(itemsAdapter);
+                new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, groupList);
+        groupListView.setAdapter(itemsAdapter);
 
     }
 

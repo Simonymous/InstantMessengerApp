@@ -9,6 +9,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
 
+import com.example.simon.instantmessengerapp.model.classes.GroupImpl;
+import com.example.simon.instantmessengerapp.model.classes.GroupList;
+
 public class LoginActivity extends AppCompatActivity {
 
     @Override
@@ -26,6 +29,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void startRegister(View view) {
+        //GroupList.getInstance().addGroup(new GroupImpl("Test231312"));
     }
 
 }
