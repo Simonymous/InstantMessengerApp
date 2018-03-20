@@ -12,12 +12,14 @@ import android.widget.EditText;
 import com.example.simon.instantmessengerapp.database.DatabaseHelper;
 
 public class AddChatActivity extends AppCompatActivity {
+    EditText groupName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_chat);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        groupName = (EditText) findViewById(R.id.editText4);
         setSupportActionBar(toolbar);
         addOnClickListener();
     }
@@ -30,9 +32,7 @@ public class AddChatActivity extends AppCompatActivity {
             public void onClick(View view) {
                 SQLiteDatabase db = new DatabaseHelper(view.getContext()).getReadableDatabase();
                 ContentValues groupValues = new ContentValues();
-                EditText groupName = (EditText) view.findViewById(R.id.editText4);
                 groupValues.put(DatabaseHelper.GROUP_NAME_FIELD_NAME, groupName.getText().toString());
-                //groupValues.put(DatabaseHelper.GROUP_NAME_FIELD_NAME, "Test23456");
                 db.insert(DatabaseHelper.GROUP_TABLE_NAME, null, groupValues);
                 db.close();
             }
