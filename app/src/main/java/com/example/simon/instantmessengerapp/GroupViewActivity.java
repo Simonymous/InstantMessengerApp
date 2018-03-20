@@ -16,7 +16,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.example.simon.instantmessengerapp.database.model.User;
+import com.example.simon.instantmessengerapp.database.adapter.GroupCursorAdapter;
 import com.example.simon.instantmessengerapp.database.DatabaseHelper;
 
 public class GroupViewActivity extends AppCompatActivity implements OnClickListener,OnItemClickListener {
@@ -40,6 +40,7 @@ public class GroupViewActivity extends AppCompatActivity implements OnClickListe
 
         initTestValues();
         testDb();
+        populateListView();
 
         groupListView.setOnItemClickListener(this);
 
@@ -65,6 +66,16 @@ public class GroupViewActivity extends AppCompatActivity implements OnClickListe
         } catch (NumberFormatException ex) {
             //Print Error
         }
+    }
+
+    private void populateListView() {
+        SQLiteDatabase db = new DatabaseHelper(this).getReadableDatabase();
+        Cursor result  = db.query(DatabaseHelper.GROUP_TABLE_NAME, null, null, null, null, null, null, null);
+        ListView lvGroups = (ListView) findViewById(R.id.groupListView);
+        GroupCursorAdapter groupCursorAdapter = new GroupCursorAdapter(this, result);
+        lvGroups.setAdapter(groupCursorAdapter);
+        //result.close();
+        db.close();
     }
 
     public void initTestValues(){

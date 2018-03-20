@@ -15,19 +15,19 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     private static final int DATABASE_VERSION = 1;
 
     public static final String USER_TABLE_NAME = "user";
-    public static final String USER_ID_FIELD_NAME = "id";
+    public static final String USER_ID_FIELD_NAME = "_id";
     public static final String USER_ID_FIELD_TYP = "INTEGER";
     public static final String USER_NAME_FIELD_NAME = "name";
     public static final String USER_NAME_FIELD_TYP = "TEXT";
 
     public static final String GROUP_TABLE_NAME = "chatGroup";
-    public static final String GROUP_ID_FIELD_NAME = "id";
+    public static final String GROUP_ID_FIELD_NAME = "_id";
     public static final String GROUP_ID_FIELD_TYP = "INTEGER";
     public static final String GROUP_NAME_FIELD_NAME = "name";
     public static final String GROUP_NAME_FIELD_TYP = "TEXT";
 
     public static final String MESSAGE_TABLE_NAME = "message";
-    public static final String MESSAGE_ID_FIELD_NAME = "id";
+    public static final String MESSAGE_ID_FIELD_NAME = "_id";
     public static final String MESSAGE_ID_FIELD_TYP = "INTEGER";
     public static final String MESSAGE_CONTENT_FIELD_NAME = "content";
     public static final String MESSAGE_CONTENT_FIELD_TYP = "TEXT";
