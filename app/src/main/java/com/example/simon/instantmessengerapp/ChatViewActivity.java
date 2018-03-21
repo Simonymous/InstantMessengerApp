@@ -36,8 +36,11 @@ public class ChatViewActivity extends AppCompatActivity {
 
     private void populateListView() {
         SQLiteDatabase db = new DatabaseHelper(this).getReadableDatabase();
-        //Todo: Select * from Message where MESSAGE_GROUP_FIELD_NAME == groupId    //Für den Kontext
-        Cursor result  = db.query(DatabaseHelper.MESSAGE_TABLE_NAME, null, null, null, null, null, null, null);
+        String whereClause = DatabaseHelper.MESSAGE_GROUP_FIELD_NAME+" = ?";
+        String[] whereArgs = new String []{
+                groupId
+        };
+        Cursor result  = db.query(DatabaseHelper.MESSAGE_TABLE_NAME, null, whereClause, whereArgs, null, null, null, null);
         messageCursorAdapter = new MessageCursorAdapter(this, result);
         messageListView.setAdapter(messageCursorAdapter);
         //result.close();
