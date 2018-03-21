@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -20,7 +21,7 @@ import android.widget.TextView;
 import com.example.simon.instantmessengerapp.database.adapter.GroupCursorAdapter;
 import com.example.simon.instantmessengerapp.database.DatabaseHelper;
 
-public class GroupViewActivity extends AppCompatActivity implements OnClickListener,OnItemClickListener {
+public class GroupViewActivity extends AppCompatActivity implements OnClickListener,OnItemClickListener,OnItemLongClickListener {
     private ListView groupListView;
     private FloatingActionButton fab;
     private GroupCursorAdapter groupCursorAdapter;
@@ -44,6 +45,7 @@ public class GroupViewActivity extends AppCompatActivity implements OnClickListe
         populateListView();
 
         groupListView.setOnItemClickListener(this);
+        groupListView.setOnItemLongClickListener(this);
 
     }
 
@@ -72,6 +74,25 @@ public class GroupViewActivity extends AppCompatActivity implements OnClickListe
         } catch (NumberFormatException ex) {
             //Print Error
         }
+    }
+
+    @Override
+    public boolean onItemLongClick(AdapterView<?> arg0, View view, int i, long l) {
+        try {
+            TextView longClickedItemGroupId = (TextView) view.findViewById(R.id.groupId); //Get Id of clicked group
+            TextView longClickedItemGroupName = (TextView) view.findViewById(R.id.groupName); //Get Name of clicked group
+
+            String[] args = new String[] {
+                    (String)longClickedItemGroupId.getText(),
+                    (String)longClickedItemGroupName.getText()
+            };
+            Intent modify_intent = new Intent(getApplicationContext(), AddChatActivity.class);
+            //modify_intent.putExtra("groupIdNCl",args); //Deliver group Name+Id to new activity
+            startActivity(modify_intent);
+        } catch (NumberFormatException ex) {
+            //Print Error
+        }
+      return true;
     }
 
     private void populateListView() {

@@ -1,6 +1,7 @@
 package com.example.simon.instantmessengerapp;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,6 +20,16 @@ public class AddChatActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Intent intent = getIntent();
+
+        if (intent.getExtras() != null) {
+            String[] args = new String[] {
+                    intent.getStringExtra("groupIdNCl")
+            };
+            groupName.setText(args[1]);
+        }
+
         setContentView(R.layout.activity_add_chat);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         groupName = (EditText) findViewById(R.id.editText4);
