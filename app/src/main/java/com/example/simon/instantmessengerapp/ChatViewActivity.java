@@ -1,5 +1,6 @@
 package com.example.simon.instantmessengerapp;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
@@ -12,10 +13,14 @@ import com.example.simon.instantmessengerapp.database.adapter.MessageCursorAdapt
 public class ChatViewActivity extends AppCompatActivity {
     private ListView messageListView;
     private MessageCursorAdapter messageCursorAdapter;
+    private String groupId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Intent intent = getIntent();
+        groupId = intent.getStringExtra("groupIdCl");
+
         setContentView(R.layout.activity_chat_view);
 
         messageListView = (ListView) findViewById(R.id.chatListview);
@@ -31,6 +36,7 @@ public class ChatViewActivity extends AppCompatActivity {
 
     private void populateListView() {
         SQLiteDatabase db = new DatabaseHelper(this).getReadableDatabase();
+        //Todo: Select * from Message where MESSAGE_GROUP_FIELD_NAME == groupId    //Für den Kontext
         Cursor result  = db.query(DatabaseHelper.MESSAGE_TABLE_NAME, null, null, null, null, null, null, null);
         messageCursorAdapter = new MessageCursorAdapter(this, result);
         messageListView.setAdapter(messageCursorAdapter);

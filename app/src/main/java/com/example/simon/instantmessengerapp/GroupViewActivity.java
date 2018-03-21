@@ -64,10 +64,10 @@ public class GroupViewActivity extends AppCompatActivity implements OnClickListe
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         try {
-             TextView clickedItemGroupName = (TextView) view.findViewById(R.id.groupName); //Get Name of clicked group
+             TextView clickedItemGroupId = (TextView) view.findViewById(R.id.groupId); //Get Name of clicked group
 
              Intent modify_intent = new Intent(getApplicationContext(), ChatViewActivity.class);
-             modify_intent.putExtra((String)clickedItemGroupName.getText(),0); //Deliver group Name to new activity
+             modify_intent.putExtra("groupIdCl",(String)clickedItemGroupId.getText()); //Deliver group Name to new activity
              startActivity(modify_intent);
         } catch (NumberFormatException ex) {
             //Print Error
@@ -105,7 +105,7 @@ public class GroupViewActivity extends AppCompatActivity implements OnClickListe
         values.put(DatabaseHelper.GROUP_NAME_FIELD_NAME, "Gruppe3");
         db.insert(DatabaseHelper.GROUP_TABLE_NAME, null, values);
 
-        //Messages
+        //Messages for Gruppe 1
         values = new ContentValues();
         values.put(DatabaseHelper.MESSAGE_CONTENT_FIELD_NAME, "Hallo wie gehts?");
         values.put(DatabaseHelper.MESSAGE_GROUP_FIELD_NAME, 1);
@@ -115,6 +115,18 @@ public class GroupViewActivity extends AppCompatActivity implements OnClickListe
         values.put(DatabaseHelper.MESSAGE_GROUP_FIELD_NAME, 1);
         values.put(DatabaseHelper.MESSAGE_SENDER_FIELD_NAME, 2);
         db.insert(DatabaseHelper.MESSAGE_TABLE_NAME, null, values);
+
+        //Messages for Gruppe 2
+        values = new ContentValues();
+        values.put(DatabaseHelper.MESSAGE_CONTENT_FIELD_NAME, "Hallo wie gehts in 2?");
+        values.put(DatabaseHelper.MESSAGE_GROUP_FIELD_NAME, 2);
+        values.put(DatabaseHelper.MESSAGE_SENDER_FIELD_NAME, 1);
+        db.insert(DatabaseHelper.MESSAGE_TABLE_NAME, null, values);
+        values.put(DatabaseHelper.MESSAGE_CONTENT_FIELD_NAME, "Auch Gut");
+        values.put(DatabaseHelper.MESSAGE_GROUP_FIELD_NAME, 2);
+        values.put(DatabaseHelper.MESSAGE_SENDER_FIELD_NAME, 2);
+        db.insert(DatabaseHelper.MESSAGE_TABLE_NAME, null, values);
+
 
         db.close();
     }

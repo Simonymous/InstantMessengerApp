@@ -31,10 +31,13 @@ public class GroupCursorAdapter extends CursorAdapter {
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
         // Find fields to populate in inflated template
-        TextView tvBody = (TextView) view.findViewById(R.id.groupName);
+        TextView tvName = (TextView) view.findViewById(R.id.groupName);
+        TextView tvId = (TextView) view.findViewById(R.id.groupId);
         // Extract properties from cursor
         String name = cursor.getString(cursor.getColumnIndexOrThrow("name"));
+        String id = cursor.getString(cursor.getColumnIndexOrThrow("_id"));
         // Populate fields with extracted properties
-        tvBody.setText(name);
+        tvName.setText(name);
+        tvId.setText(id);
     }
 }
