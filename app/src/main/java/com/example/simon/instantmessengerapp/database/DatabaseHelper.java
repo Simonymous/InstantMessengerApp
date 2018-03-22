@@ -19,12 +19,20 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     public static final String USER_ID_FIELD_TYP = "INTEGER";
     public static final String USER_NAME_FIELD_NAME = "name";
     public static final String USER_NAME_FIELD_TYP = "TEXT";
+    public static final String USER_PASSWORD_FIELD_NAME = "password";
+    public static final String USER_PASSWORD_FIELD_TYP = "TEXT";
 
     public static final String GROUP_TABLE_NAME = "chatGroup";
     public static final String GROUP_ID_FIELD_NAME = "_id";
     public static final String GROUP_ID_FIELD_TYP = "INTEGER";
     public static final String GROUP_NAME_FIELD_NAME = "name";
     public static final String GROUP_NAME_FIELD_TYP = "TEXT";
+
+    public static final String GROUP_USER_TABLE_NAME = "groupUser";
+    public static final String GROUP_USER_USER_FIELD_NAME = "user";
+    public static final String GROUP_USER_USER_FIELD_TYP = "INTEGER";
+    public static final String GROUP_USER_GROUP_FIELD_NAME = "chatGroup";
+    public static final String GROUP_USER_GROUP_FIELD_TYP = "INTEGER";
 
     public static final String MESSAGE_TABLE_NAME = "message";
     public static final String MESSAGE_ID_FIELD_NAME = "_id";
@@ -45,9 +53,10 @@ public class DatabaseHelper extends SQLiteOpenHelper{
      */
     private static final String USER_TABLE_CREATE =
             "CREATE TABLE " + USER_TABLE_NAME + "( "
-            + USER_ID_FIELD_NAME + " " + USER_ID_FIELD_TYP + " PRIMARY KEY AUTOINCREMENT, "
-            + USER_NAME_FIELD_NAME + " " + USER_NAME_FIELD_TYP + " NOT NULL UNIQUE "
-            + " );";
+                    + USER_ID_FIELD_NAME + " " + USER_ID_FIELD_TYP + " PRIMARY KEY AUTOINCREMENT, "
+                    + USER_NAME_FIELD_NAME + " " + USER_NAME_FIELD_TYP + " NOT NULL UNIQUE, "
+                    + USER_PASSWORD_FIELD_NAME + " " + USER_PASSWORD_FIELD_TYP
+                    + " );";
 
     /**
      * CREATE TABLE `group` (
@@ -60,6 +69,27 @@ public class DatabaseHelper extends SQLiteOpenHelper{
                     + GROUP_ID_FIELD_NAME + " " + GROUP_ID_FIELD_TYP + " PRIMARY KEY AUTOINCREMENT , "
                     + GROUP_NAME_FIELD_NAME + " " + GROUP_NAME_FIELD_TYP + " NOT NULL "
                     + " ); ";
+
+    /**
+     * CREATE TABLE `groupUser` (
+     *`user`	INTEGER NOT NULL,
+     *`group`	INTEGER NOT NULL,
+     *FOREIGN KEY(`group`) REFERENCES `group`(`id`),
+     *FOREIGN KEY(`user`) REFERENCES `user`(`id`),
+     *PRIMARY KEY(`user`,`group`)
+     *);
+     */
+    private static final String GROUP_USER_TABLE_CREATE =
+            "CREATE TABLE " + GROUP_USER_TABLE_NAME + " ( "
+                    + GROUP_USER_USER_FIELD_NAME + " " + GROUP_USER_USER_FIELD_TYP + " , "
+                    + GROUP_USER_GROUP_FIELD_NAME + " " + GROUP_USER_GROUP_FIELD_TYP + " , "
+                    + "  PRIMARY KEY ( " + GROUP_USER_USER_FIELD_NAME + " , "
+                    + GROUP_USER_GROUP_FIELD_NAME + " ) ,"
+                    + " FOREIGN KEY( " + GROUP_USER_GROUP_FIELD_NAME + " ) " + " REFERENCES "
+                    + GROUP_TABLE_NAME + " ( " + GROUP_ID_FIELD_NAME + " ), "
+                    + " FOREIGN KEY( " + GROUP_USER_USER_FIELD_NAME + " ) " + " REFERENCES "
+                    + USER_TABLE_NAME + " ( " + USER_ID_FIELD_NAME + " ) "
+                    + " );";
 
     /**
      * CREATE TABLE `message` (
@@ -93,6 +123,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         try {
             db.execSQL(USER_TABLE_CREATE);
             db.execSQL(GROUP_TABLE_CREATE);
+            db.execSQL(GROUP_USER_TABLE_CREATE);
             db.execSQL(MESSAGE_TABLE_CREATE);
         } catch (SQLException ex){
             //TODO Fehlermeldungen auslagern
