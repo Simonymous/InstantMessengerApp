@@ -4,9 +4,13 @@ package com.example.simon.instantmessengerapp.core.rest.services;
 import com.example.simon.instantmessengerapp.model.classes.MessageImpl;
 import com.example.simon.instantmessengerapp.model.interfaces.Group;
 import com.example.simon.instantmessengerapp.model.interfaces.Message;
+import com.google.gson.Gson;
+import com.sun.jersey.api.client.Client;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+
+import javax.ws.rs.core.Response;
 
 /**
  * class representing the client rest interface to send server requests for groups
@@ -19,9 +23,9 @@ public class GroupRestClientImpl  {
     private static final String USERS_PATH = "users";
     private static final String MESSAGES_PATH = "messages";
 
-    //private Client client;
-    //private Response response;
-    //private Gson gSon;
+    private Client client;
+    private Response response;
+    private Gson gSon;
 
     /**
      * default constructor

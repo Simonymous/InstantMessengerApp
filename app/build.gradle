@@ -9,6 +9,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -32,5 +33,17 @@ dependencies {
     // https://mvnrepository.com/artifact/com.google.code.gson/gson
     compile 'com.google.code.gson:gson:2.8.2'
     // https://mvnrepository.com/artifact/javax.ws.rs/jsr311-api
-    compile 'javax.ws.rs:jsr311-api:1.1.1'
+    //compile 'javax.ws.rs:jsr311-api:1.1.1'
+    // https://mvnrepository.com/artifact/com.sun.jersey/jersey-client
+    compile group: 'com.sun.jersey', name: 'jersey-client', version: '1.9.1'
+
+
+
+    configurations {
+        compile.exclude group: 'javax.inject', module: 'javax.inject'
+    }
+
+    repositories {
+        mavenLocal()
+    }
 }
