@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -44,7 +45,7 @@ public class ChatViewActivity extends AppCompatActivity {
         SQLiteDatabase db = new DatabaseHelper(view.getContext()).getReadableDatabase();
         ContentValues values = new ContentValues();
         values.put(DatabaseHelper.MESSAGE_CONTENT_FIELD_NAME, messageEt.getText().toString());
-        values.put(DatabaseHelper.MESSAGE_GROUP_FIELD_NAME, 1); //TODO: Do for Group ID Kontext
+        values.put(DatabaseHelper.MESSAGE_GROUP_FIELD_NAME, Integer.parseInt(groupId));
         values.put(DatabaseHelper.MESSAGE_SENDER_FIELD_NAME, 1); //TODO: Do for own ID
         db.insert(DatabaseHelper.MESSAGE_TABLE_NAME, null, values);
         db.close();
