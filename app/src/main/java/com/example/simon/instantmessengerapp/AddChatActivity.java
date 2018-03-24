@@ -10,7 +10,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.simon.instantmessengerapp.core.rest.services.GroupRestClientImpl;
 import com.example.simon.instantmessengerapp.database.DatabaseHelper;
+import com.example.simon.instantmessengerapp.model.classes.GroupImpl;
+import com.example.simon.instantmessengerapp.model.interfaces.Group;
 
 public class AddChatActivity extends AppCompatActivity {
     EditText groupName;
@@ -35,15 +38,21 @@ public class AddChatActivity extends AppCompatActivity {
         groupName = (EditText) findViewById(R.id.editText4);
         setSupportActionBar(toolbar);
         addButton = findViewById(R.id.addChatButton);
+
+        //TODO: Show Users for adding
+
     }
 
 
     public void addGroup(View view) {
-        SQLiteDatabase db = new DatabaseHelper(view.getContext()).getReadableDatabase();
-        ContentValues groupValues = new ContentValues();
-        groupValues.put(DatabaseHelper.GROUP_NAME_FIELD_NAME, groupName.getText().toString());
-        db.insert(DatabaseHelper.GROUP_TABLE_NAME, null, groupValues);
-        db.close();
-        finish();
+        GroupRestClientImpl grcl = new GroupRestClientImpl();
+        grcl.addGroup(new GroupImpl(groupName.getText().toString()));
+        //TODO: Add Members to Group
+//        SQLiteDatabase db = new DatabaseHelper(view.getContext()).getReadableDatabase();
+//        ContentValues groupValues = new ContentValues();
+//        groupValues.put(DatabaseHelper.GROUP_NAME_FIELD_NAME, groupName.getText().toString());
+//        db.insert(DatabaseHelper.GROUP_TABLE_NAME, null, groupValues);
+//        db.close();
+//        finish();
     }
 }

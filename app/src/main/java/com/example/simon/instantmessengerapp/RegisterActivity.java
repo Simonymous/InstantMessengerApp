@@ -4,26 +4,40 @@ import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
+
+import com.example.simon.instantmessengerapp.core.UserAuthenticator;
+import com.example.simon.instantmessengerapp.core.rest.interfaces.UserRestClient;
+import com.example.simon.instantmessengerapp.core.rest.services.UserRestClientImpl;
 
 public class RegisterActivity extends AppCompatActivity {
 
+    private EditText registerName;
+    private EditText registerPassword;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        registerName = findViewById(R.id.registerName);
+        registerPassword = findViewById(R.id.registerPassword);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
     }
 
     public void handleRegister(View view) {
-      //Register User
+        UserRestClientImpl urcl = new UserRestClientImpl();
+        urcl.addUser(registerName.getText().toString(),registerPassword.getText().toString());
         finish();
     }
 
     public void handleCheck(View view) {
-      if(true) {
-          showCheckToast("Nutzername verfügbar!");
-      } else {
+        UserAuthenticator ua = new UserAuthenticator();
+      if(ua.doesUserExist(registerName.getText().toString())) {
           showCheckToast("Nutzername nicht verfügbar!");
+      } else {
+          showCheckToast("Nutzername verfügbar!");
       }
     }
 

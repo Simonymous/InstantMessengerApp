@@ -12,8 +12,10 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.simon.instantmessengerapp.core.rest.services.GroupRestClientImpl;
 import com.example.simon.instantmessengerapp.database.DatabaseHelper;
 import com.example.simon.instantmessengerapp.database.adapter.MessageCursorAdapter;
+import com.example.simon.instantmessengerapp.model.classes.MessageImpl;
 
 public class ChatViewActivity extends AppCompatActivity {
     private ListView messageListView;
@@ -42,13 +44,21 @@ public class ChatViewActivity extends AppCompatActivity {
     }
 
     public void sendMessage(View view) {
-        SQLiteDatabase db = new DatabaseHelper(view.getContext()).getReadableDatabase();
-        ContentValues values = new ContentValues();
-        values.put(DatabaseHelper.MESSAGE_CONTENT_FIELD_NAME, messageEt.getText().toString());
-        values.put(DatabaseHelper.MESSAGE_GROUP_FIELD_NAME, Integer.parseInt(groupId));
-        values.put(DatabaseHelper.MESSAGE_SENDER_FIELD_NAME, 1); //TODO: Do for own ID
-        db.insert(DatabaseHelper.MESSAGE_TABLE_NAME, null, values);
-        db.close();
+        GroupRestClientImpl grcl = new GroupRestClientImpl();
+
+        MessageImpl msg = new MessageImpl();
+        msg.setContent(messageEt.getText().toString());
+        msg.setGroup(Integer.parseInt(groupId));
+        msg.setUser(1); //TODO: Set id for authenticated user
+
+        grcl.postMessage(msg);
+//        SQLiteDatabase db = new DatabaseHelper(view.getContext()).getReadableDatabase();
+//        ContentValues values = new ContentValues();
+//        values.put(DatabaseHelper.MESSAGE_CONTENT_FIELD_NAME, messageEt.getText().toString());
+//        values.put(DatabaseHelper.MESSAGE_GROUP_FIELD_NAME, Integer.parseInt(groupId));
+//        values.put(DatabaseHelper.MESSAGE_SENDER_FIELD_NAME, 1); //TODO: Do for own ID
+//        db.insert(DatabaseHelper.MESSAGE_TABLE_NAME, null, values);
+//        db.close();
         populateListView();
 
     }
