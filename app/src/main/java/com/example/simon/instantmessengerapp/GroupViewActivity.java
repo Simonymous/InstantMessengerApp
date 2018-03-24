@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import com.example.simon.instantmessengerapp.database.adapter.GroupCursorAdapter;
 import com.example.simon.instantmessengerapp.database.DatabaseHelper;
+import com.example.simon.instantmessengerapp.gcmClasses.GcmRegister;
 
 public class GroupViewActivity extends AppCompatActivity implements OnClickListener,OnItemClickListener,OnItemLongClickListener {
     private ListView groupListView;
@@ -40,6 +41,7 @@ public class GroupViewActivity extends AppCompatActivity implements OnClickListe
 
         groupListView = (ListView) findViewById(R.id.groupListView);
 
+        Intent i= new Intent(getApplicationContext(), GcmRegister.class);
         initTestValues();
         testDb();
         populateListView();

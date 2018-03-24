@@ -1,22 +1,31 @@
 package com.example.simon.instantmessengerapp.gcmClasses;
 
+import android.app.IntentService;
+import android.app.Service;
 import android.content.Context;
+import android.content.Intent;
+import android.os.IBinder;
+import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.example.simon.instantmessengerapp.R;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.google.android.gms.iid.InstanceID;
-import com.google.android.gms.iid.InstanceIDListenerService;
 
 import java.io.IOException;
 
 /**
- * Created by Christian on 23.03.2018.
+ * Created by Christian on 24.03.2018.
  */
 
-public class MyInstanceIDListenerService extends InstanceIDListenerService {
+public class GcmRegister extends IntentService {
+
+    public GcmRegister(String name) {
+        super(name);
+    }
+
     @Override
-    public void onTokenRefresh() {
+    protected void onHandleIntent(@Nullable Intent intent) {
         Context context = getApplicationContext();
         InstanceID instanceID = InstanceID.getInstance(context);
         try {
@@ -25,6 +34,6 @@ public class MyInstanceIDListenerService extends InstanceIDListenerService {
         catch(IOException e){
             Log.e("Token", e.getMessage());
         }
-        //send token to app server
+        //TODO send token to app server
     }
 }
