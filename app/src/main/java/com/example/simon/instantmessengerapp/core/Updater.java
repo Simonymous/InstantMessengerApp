@@ -4,6 +4,8 @@ import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 import android.view.View;
 
+import com.example.simon.instantmessengerapp.core.rest.services.GroupRestClientImpl;
+import com.example.simon.instantmessengerapp.core.rest.services.UserRestClientImpl;
 import com.example.simon.instantmessengerapp.database.DatabaseHelper;
 import com.example.simon.instantmessengerapp.model.classes.GroupImpl;
 import com.example.simon.instantmessengerapp.model.interfaces.Group;
@@ -14,40 +16,43 @@ import com.example.simon.instantmessengerapp.model.interfaces.Message;
  */
 
 public class Updater {
-    //TODO: User/Group Restobjekte anlegen
+    private GroupRestClientImpl grcl;
+    private UserRestClientImpl urcl;
     public Updater() {
-        //TODO: User/Group Rest Objekte instanzieren
+        grcl = new GroupRestClientImpl();
+        urcl = new UserRestClientImpl();
     }
 
     public void addGroup(View view, Group g) {
-        //TODO: Gruppe an rest übergeben und returnen
-        Group serverGroup = new GroupImpl();
+        Group newGroup = grcl.addGroup(g);
         SQLiteDatabase db = new DatabaseHelper(view.getContext()).getReadableDatabase();
         ContentValues groupValues = new ContentValues();
-        groupValues.put(DatabaseHelper.GROUP_NAME_FIELD_NAME, serverGroup.getGroupName());
-        groupValues.put(DatabaseHelper.GROUP_ID_FIELD_NAME, serverGroup.getGroupId());
+        groupValues.put(DatabaseHelper.GROUP_NAME_FIELD_NAME, newGroup.getGroupName());
+        groupValues.put(DatabaseHelper.GROUP_ID_FIELD_NAME, newGroup.getGroupId());
 
-        db.insert(DatabaseHelper.GROUP_TABLE_NAME, null, groupValues);
+        db.insert(DatabaseHelper.GROiUP_TABLE_NAME, null, groupValues);
         db.close();
     }
 
-    public void editGroup(View view, Group g) {
-        //TODO: Gruppe an rest übergeben und returnen
-        Group serverGroup = new GroupImpl();
+    public void changeGroup(View view, Group g) {
+        grcl.changeGroup(Integer.toString(g.getGroupId()),g);
         SQLiteDatabase db = new DatabaseHelper(view.getContext()).getReadableDatabase();
         ContentValues groupValues = new ContentValues();
-        groupValues.put(DatabaseHelper.GROUP_NAME_FIELD_NAME, serverGroup.getGroupName());
-        groupValues.put(DatabaseHelper.GROUP_ID_FIELD_NAME, serverGroup.getGroupId());
-
-        db.insert(DatabaseHelper.GROUP_TABLE_NAME, null, groupValues);
+        //groupValues.put(DatabaseHelper.GROUP_NAME_FIELD_NAME, serverGroup.getGroupName());
+        //groupValues.put(DatabaseHelper.GROUP_ID_FIELD_NAME, serverGroup.getGroupId());
+        // TODO: Change in local Database
+        //db.insert(DatabaseHelper.GROUP_TABLE_NAME, null, groupValues);
         db.close();
     }
 
     public void deleteGroup(View view, Group g) {
-        //TODO: Gruppe an rest übergeben und lokal löschen
+        grcl.removeGroup(Integer.toString(g.getGroupId()));
+        //TODO: Gruppe lokal löschen
     }
 
     public void sendMessage(View view, Message m) {
+        grcl.postMessage(m);
+
         SQLiteDatabase db = new DatabaseHelper(view.getContext()).getReadableDatabase();
         ContentValues values = new ContentValues();
         values.put(DatabaseHelper.MESSAGE_CONTENT_FIELD_NAME, m.getContent());
