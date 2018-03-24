@@ -12,23 +12,29 @@ import com.example.simon.instantmessengerapp.model.classes.UserImpl;
  */
 
 public class UserAuthenticator {
-    private UserRestClientImpl urcl;
+    private UserRestClientImpl urci;
 
     public UserAuthenticator() {
-        urcl = new UserRestClientImpl();
+        urci = new UserRestClientImpl();
     }
 
     public boolean authenticateUser(String username, String password) {
-        User user = urcl.getTheUserByName(username);
+        User user = urci.getTheUserByName(username);
         if (user == null) {
             return false;
         } else {
-            String hashedPassword = "";//Hashing.sha256().hashString(password, StandardCharsets.UTF_8).toString();
+            String hashedPassword ="";// Hashing.sha256().hashString(password, StandardCharsets.UTF_8).toString(); TODO: Hashing!!
            if (user.getPassword().equals(hashedPassword)) {
                return true;
             } else {
                return false;
             }
         }
+    }
+
+    public boolean doesUserExist(String name) {
+        User user = urci.getTheUserByName(name);
+
+        return user != null;
     }
 }
