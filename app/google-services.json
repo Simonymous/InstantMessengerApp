@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "252419408351",
+    "firebase_url": "https://instantm-27e26.firebaseio.com",
+    "project_id": "instantm-27e26",
+    "storage_bucket": "instantm-27e26.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:252419408351:android:d7902a0fe3e3568d",
+        "android_client_info": {
+          "package_name": "com.example.simon.instantmessengerapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "252419408351-pnlm6sjfl4e8n8ol6b306g5uv5rck39l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD_dFdfYn5SuR5zDUTxfbb9BgM_yLP1kMg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

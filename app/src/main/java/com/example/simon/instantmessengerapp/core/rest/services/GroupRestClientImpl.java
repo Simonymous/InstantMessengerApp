@@ -361,7 +361,7 @@ public class GroupRestClientImpl  {
             response = client
                     .target(URL + WEB_CONTEXT_PATH)
                     .path(GROUPS_PATH)
-                    .path(msg.getGroup())
+                    .path(Integer.toString(msg.getGroup()))
                     .path(MESSAGES_PATH)
                     .request(MediaType.APPLICATION_JSON)
                     .post(Entity.json(json)); // TODO geht so nicht

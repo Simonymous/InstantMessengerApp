@@ -60,63 +60,63 @@ public class UserRestClientImpl  {
         return gson.fromJson(json, UserImpl.class);
     }
 
-    /**
-     * send request to initate updater notify
-     *
-     * @return Response
-     */
-    public void initiateUpdate() {
-        gSon = new GsonBuilder().create();
-        //JSONClientAddress address = new JSONClientAddress(OwnAddress.getInstance().getPort(), OwnAddress.getInstance().getAddress());
-        //System.out.println("Initiate update-Listener on : "+ OwnAddress.getInstance().getAddress() + ":"+OwnAddress.getInstance().getPort());
+//    /**
+//     * send request to initate updater notify
+//     *
+//     * @return Response
+//     */
+//    public void initiateUpdate() {
+//        gSon = new GsonBuilder().create();
+//        //JSONClientAddress address = new JSONClientAddress(OwnAddress.getInstance().getPort(), OwnAddress.getInstance().getAddress());
+//        //System.out.println("Initiate update-Listener on : "+ OwnAddress.getInstance().getAddress() + ":"+OwnAddress.getInstance().getPort());
+////
+//        String json = gSon.toJson(address);
 //
-        String json = gSon.toJson(address);
-
-        try {
-            response = client
-                    .target(URL + WEB_CONTEXT_PATH)
-                    .path(USERS_PATH)
-                    .path(INIT_PATH)
-                    .request(MediaType.APPLICATION_JSON)
-                    .post(Entity.json(json));
-
-            if (response.getStatus() == 500) {
-                throw new RuntimeException(ERR_INTERNAL_SERVER_ERROR + ": " + response.getStatus());
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    /**
-     * send request to stop updater notify
-     *
-     * @return Response
-     */
-    public void stopUpdate() {
-        gSon = new GsonBuilder().create();
-       //JSONClientAddress address = new JSONClientAddress(OwnAddress.getInstance().getPort(), OwnAddress.getInstance().getAddress());
-       // System.out.println("Shutdown update-Listener on : "+ OwnAddress.getInstance().getAddress() + ":"+OwnAddress.getInstance().getPort());
-
-       // String json = gSon.toJson(address);
-
-        try {
-            response = client
-                    .target(URL + WEB_CONTEXT_PATH)
-                    .path(USERS_PATH)
-                    .path(STOP_PATH)
-                    .request(MediaType.APPLICATION_JSON)
-                    .post(Entity.json(json));
-
-            if (response.getStatus() == 500) {
-                throw new RuntimeException(ERR_INTERNAL_SERVER_ERROR + ": " + response.getStatus());
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
+//        try {
+//            response = client
+//                    .target(URL + WEB_CONTEXT_PATH)
+//                    .path(USERS_PATH)
+//                    .path(INIT_PATH)
+//                    .request(MediaType.APPLICATION_JSON)
+//                    .post(Entity.json(json));
+//
+//            if (response.getStatus() == 500) {
+//                throw new RuntimeException(ERR_INTERNAL_SERVER_ERROR + ": " + response.getStatus());
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//
+//    }
+//
+//    /**
+//     * send request to stop updater notify
+//     *
+//     * @return Response
+//     */
+//    public void stopUpdate() {
+//        gSon = new GsonBuilder().create();
+//       //JSONClientAddress address = new JSONClientAddress(OwnAddress.getInstance().getPort(), OwnAddress.getInstance().getAddress());
+//       // System.out.println("Shutdown update-Listener on : "+ OwnAddress.getInstance().getAddress() + ":"+OwnAddress.getInstance().getPort());
+//
+//       // String json = gSon.toJson(address);
+//
+//        try {
+//            response = client
+//                    .target(URL + WEB_CONTEXT_PATH)
+//                    .path(USERS_PATH)
+//                    .path(STOP_PATH)
+//                    .request(MediaType.APPLICATION_JSON)
+//                    .post(Entity.json(json));
+//
+//            if (response.getStatus() == 500) {
+//                throw new RuntimeException(ERR_INTERNAL_SERVER_ERROR + ": " + response.getStatus());
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//
+//    }
 
     /**
      * send requst to change user
@@ -328,7 +328,6 @@ public class UserRestClientImpl  {
      * @param name - username to look for
      * @return User - found user
      */
-    @Override
     public User getTheUserByName(String name) {
         try {
             response = client

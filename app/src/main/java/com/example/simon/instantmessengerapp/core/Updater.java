@@ -30,7 +30,7 @@ public class Updater {
         groupValues.put(DatabaseHelper.GROUP_NAME_FIELD_NAME, newGroup.getGroupName());
         groupValues.put(DatabaseHelper.GROUP_ID_FIELD_NAME, newGroup.getGroupId());
 
-        db.insert(DatabaseHelper.GROiUP_TABLE_NAME, null, groupValues);
+        db.insert(DatabaseHelper.GROUP_TABLE_NAME, null, groupValues);
         db.close();
     }
 
