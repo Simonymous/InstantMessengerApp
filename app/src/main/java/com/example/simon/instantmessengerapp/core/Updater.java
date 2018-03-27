@@ -1,6 +1,7 @@
 package com.example.simon.instantmessengerapp.core;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.view.View;
 
@@ -23,12 +24,12 @@ public class Updater {
         urcl = UserRestClientImpl.getInstance();
     }
 
-    public void addGroup(View view, Group g) {
-        Group newGroup = grcl.addGroup(g);
-        SQLiteDatabase db = new DatabaseHelper(view.getContext()).getReadableDatabase();
+    public void addGroup(Context c, Group g) {
+
+        SQLiteDatabase db = new DatabaseHelper(c).getReadableDatabase();
         ContentValues groupValues = new ContentValues();
-        groupValues.put(DatabaseHelper.GROUP_NAME_FIELD_NAME, newGroup.getGroupName());
-        groupValues.put(DatabaseHelper.GROUP_ID_FIELD_NAME, newGroup.getGroupId());
+        groupValues.put(DatabaseHelper.GROUP_NAME_FIELD_NAME, g.getGroupName());
+        groupValues.put(DatabaseHelper.GROUP_ID_FIELD_NAME, g.getGroupId());
 
         db.insert(DatabaseHelper.GROUP_TABLE_NAME, null, groupValues);
         db.close();

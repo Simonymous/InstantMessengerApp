@@ -1,11 +1,14 @@
 package com.example.simon.instantmessengerapp;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.os.ResultReceiver;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -41,9 +44,14 @@ public class GroupViewActivity extends AppCompatActivity implements OnClickListe
 
         groupListView = (ListView) findViewById(R.id.groupListView);
 
-        Intent i= new Intent(getApplicationContext(), GcmRegister.class);
-        initTestValues();
-        testDb();
+        Intent intent = new Intent(this, GroupViewService.class);
+        intent.setAction(GroupViewService.ACTION_POLLING);
+        intent.putExtra("receiver", new Receiver(new Handler()));
+        startService(intent);
+
+        //Intent i= new Intent(getApplicationContext(), GcmRegister.class);
+        //initTestValues();
+        //testDb();
         populateListView();
 
         groupListView.setOnItemClickListener(this);
@@ -186,6 +194,24 @@ public class GroupViewActivity extends AppCompatActivity implements OnClickListe
         result.close();
 
         db.close();
+    }
+
+    private class Receiver extends ResultReceiver {
+        @SuppressLint("RestrictedApi")
+        public Receiver(Handler handler) {
+            super(handler);
+        }
+
+        @SuppressLint("RestrictedApi")
+        @Override
+        protected void onReceiveResult(int resultCode, Bundle resultData) {
+            super.onReceiveResult(resultCode, resultData);
+            if (resultCode == 1) {
+                boolean success = resultData.getBoolean("success");
+                if(success) populateListView();
+                //else showFailedLogin(resultData.getString("error"));
+            }
+        }
     }
 
 }

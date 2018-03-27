@@ -50,6 +50,13 @@
                 <action android:name="com.example.simon.instantmessengerapp.RegisterService.ACTION_Register"/>
             </intent-filter>
         </service>
+        <service android:name=".GroupViewService"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.example.simon.instantmessengerapp.GroupViewService.ACTION_POLLING"/>
+            </intent-filter>
+        </service>
         <!--<service android:name="[.MyInstanceIDService]" android:exported="false">-->
             <!--<intent-filter>-->
                 <!--<action android:name="com.google.android.gms.iid.InstanceID"/>-->
