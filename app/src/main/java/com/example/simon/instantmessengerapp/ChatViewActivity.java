@@ -1,9 +1,11 @@
 package com.example.simon.instantmessengerapp;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +13,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.support.v4.os.ResultReceiver;
+
+
 
 import com.example.simon.instantmessengerapp.core.rest.services.GroupRestClientImpl;
 import com.example.simon.instantmessengerapp.database.DatabaseHelper;
@@ -30,6 +35,11 @@ public class ChatViewActivity extends AppCompatActivity {
         groupId = intent.getStringExtra("groupIdCl");
 
         setContentView(R.layout.activity_chat_view);
+
+        Intent intentA = new Intent(this, ChatViewService.class);
+        intent.putExtra("receiver", new Receiver(new Handler()));
+        intent.putExtra("groupID", groupId);
+        startService(intentA);
 
         messageListView = (ListView) findViewById(R.id.chatListview);
         messageEt = (EditText) findViewById(R.id.chatText);
@@ -74,5 +84,23 @@ public class ChatViewActivity extends AppCompatActivity {
         messageListView.setAdapter(messageCursorAdapter);
         //result.close();
         db.close();
+    }
+
+    private class Receiver extends ResultReceiver {
+        @SuppressLint("RestrictedApi")
+        public Receiver(Handler handler) {
+            super(handler);
+        }
+
+        @SuppressLint("RestrictedApi")
+        @Override
+        protected void onReceiveResult(int resultCode, Bundle resultData) {
+            super.onReceiveResult(resultCode, resultData);
+            if (resultCode == 1) {
+                boolean success = resultData.getBoolean("success");
+                if(success) populateListView();
+                //else showFailedLogin(resultData.getString("error"));
+            }
+        }
     }
 }
