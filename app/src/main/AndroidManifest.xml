@@ -43,7 +43,13 @@
                 <action android:name="com.example.simon.instantmessengerapp.LoginService.ACTION_LOGIN"/>
             </intent-filter>
         </service>
-
+        <service android:name=".RegisterService"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.example.simon.instantmessengerapp.RegisterService.ACTION_Register"/>
+            </intent-filter>
+        </service>
         <!--<service android:name="[.MyInstanceIDService]" android:exported="false">-->
             <!--<intent-filter>-->
                 <!--<action android:name="com.google.android.gms.iid.InstanceID"/>-->

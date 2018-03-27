@@ -8,7 +8,9 @@ import android.support.annotation.Nullable;
 import android.support.v4.os.ResultReceiver;
 
 import com.example.simon.instantmessengerapp.core.UserAuthenticator;
+import com.example.simon.instantmessengerapp.core.rest.interfaces.UserRestClient;
 import com.example.simon.instantmessengerapp.core.rest.services.UserRestClientImpl;
+import com.example.simon.instantmessengerapp.model.interfaces.User;
 
 /**
  * Created by simon on 27.03.18.
@@ -45,17 +47,32 @@ public class RegisterService  extends IntentService{
         }
     }
 
-    private void handleActionRegister(String name, String password, Intent intent) {
-
-
-    }
     @SuppressLint("RestrictedApi")
-    private void handleActionCheck(String name, String password, Intent intent) {
-        UserRestClientImpl urcl = new UserRestClientImpl();
+    private void handleActionRegister(String name, String password, Intent intent) {
+        UserRestClientImpl urci = new UserRestClientImpl();
         ResultReceiver rc = intent.getParcelableExtra("receiver");
         Bundle bundle = new Bundle();
-        if (urcl.getUserByName(name) == null) {
-          bundle.putBoolean("succes",true);
+        if(urci.getUserByName(name) != null) {
+            User user = urci.addUser(name,password);
+            //TODO: ADD User to local db for ID and....
+            bundle.putBoolean("success",true);
+            bundle.putString("function","register");
+
+        } else {
+            bundle.putBoolean("error",false);
+            bundle.putString("error","Nutzername nicht verfügbar");
+        }
+        rc.send(1, bundle);
+
+    }
+
+    @SuppressLint("RestrictedApi")
+    private void handleActionCheck(String name, String password, Intent intent) {
+        UserRestClientImpl urci = new UserRestClientImpl();
+        ResultReceiver rc = intent.getParcelableExtra("receiver");
+        Bundle bundle = new Bundle();
+        if (urci.getUserByName(name) != null) {
+          bundle.putBoolean("success",true);
           bundle.putString("function","check");
         } else {
             bundle.putBoolean("error",false);
