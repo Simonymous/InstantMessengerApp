@@ -1,8 +1,6 @@
 package com.example.simon.instantmessengerapp;
 
-import android.content.ContentValues;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -11,9 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.simon.instantmessengerapp.core.rest.services.GroupRestClientImpl;
-import com.example.simon.instantmessengerapp.database.DatabaseHelper;
 import com.example.simon.instantmessengerapp.model.classes.GroupImpl;
-import com.example.simon.instantmessengerapp.model.interfaces.Group;
 
 public class AddChatActivity extends AppCompatActivity {
     EditText groupName;

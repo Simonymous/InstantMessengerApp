@@ -1,9 +1,12 @@
 package com.example.simon.instantmessengerapp.core;
 
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.util.Base64;
 import android.util.Log;
 
 import com.example.simon.instantmessengerapp.core.rest.services.UserRestClientImpl;
+import com.example.simon.instantmessengerapp.database.DatabaseHelper;
 import com.example.simon.instantmessengerapp.model.OwnUser;
 import com.example.simon.instantmessengerapp.model.interfaces.User;
 import com.example.simon.instantmessengerapp.model.classes.UserImpl;
