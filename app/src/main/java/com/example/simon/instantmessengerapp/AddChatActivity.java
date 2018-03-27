@@ -45,7 +45,7 @@ public class AddChatActivity extends AppCompatActivity {
 
 
     public void addGroup(View view) {
-        GroupRestClientImpl grcl = new GroupRestClientImpl();
+        GroupRestClientImpl grcl = GroupRestClientImpl.getInstance();
         grcl.addGroup(new GroupImpl(groupName.getText().toString()));
         //TODO: Add Members to Group
 //        SQLiteDatabase db = new DatabaseHelper(view.getContext()).getReadableDatabase();

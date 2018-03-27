@@ -38,7 +38,7 @@ public class LoginService extends IntentService{
 
     @SuppressLint("RestrictedApi")
     private void handleActionLogin(String username, String password, Intent intent) {
-        UserRestClientImpl urcl = new UserRestClientImpl();
+        UserRestClientImpl urcl = UserRestClientImpl.getInstance();
         ResultReceiver rc = intent.getParcelableExtra("receiver");
         Bundle bundle = new Bundle();
         if (urcl.getUserByName(username) != null) {

@@ -28,9 +28,10 @@ import static com.example.simon.instantmessengerapp.core.rest.constants.GroupRes
 /**
  * class representing the client rest interface to send server requests for groups
  */                                //implements com.example.simon.instantmessengerapp.core.rest.interfaces.GroupRestClient
-public class GroupRestClientImpl  {
+public class GroupRestClientImpl {
+    private static GroupRestClientImpl instance = null;
 
-    private static final String URL = "http://192.168.2.103:4434";
+    private static final String URL = "http://192.168.178.28:4434";
     private static final String WEB_CONTEXT_PATH = "/im";
     private static final String GROUPS_PATH = "groups";
     private static final String USERS_PATH = "users";
@@ -43,7 +44,7 @@ public class GroupRestClientImpl  {
     /**
      * default constructor
      */
-    public GroupRestClientImpl() {
+    private GroupRestClientImpl() {
         client = ClientBuilder.newClient().register(AndroidFriendlyFeature.class);
         response = null;
     }
@@ -346,7 +347,7 @@ public class GroupRestClientImpl  {
     /**
      * send request to post a message
      *
-     * @param msg     message to post
+     * @param msg message to post
      */
     public void postMessage(Message msg) {
         gSon = new GsonBuilder().create();
@@ -376,6 +377,12 @@ public class GroupRestClientImpl  {
         }
     }
 
+    public static GroupRestClientImpl getInstance() {
+        if (instance == null) {
+            instance = new GroupRestClientImpl();
+        }
+        return instance;
+    }
 }
 
 

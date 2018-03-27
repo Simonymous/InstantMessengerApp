@@ -44,7 +44,7 @@ public class ChatViewActivity extends AppCompatActivity {
     }
 
     public void sendMessage(View view) {
-        GroupRestClientImpl grcl = new GroupRestClientImpl();
+        GroupRestClientImpl grcl = GroupRestClientImpl.getInstance();
 
         MessageImpl msg = new MessageImpl();
         msg.setContent(messageEt.getText().toString());

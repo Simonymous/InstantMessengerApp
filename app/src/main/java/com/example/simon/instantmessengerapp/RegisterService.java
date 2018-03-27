@@ -49,7 +49,7 @@ public class RegisterService  extends IntentService{
 
     @SuppressLint("RestrictedApi")
     private void handleActionRegister(String name, String password, Intent intent) {
-        UserRestClientImpl urci = new UserRestClientImpl();
+        UserRestClientImpl urci = UserRestClientImpl.getInstance();
         ResultReceiver rc = intent.getParcelableExtra("receiver");
         Bundle bundle = new Bundle();
         if(urci.getUserByName(name) != null) {
@@ -68,7 +68,7 @@ public class RegisterService  extends IntentService{
 
     @SuppressLint("RestrictedApi")
     private void handleActionCheck(String name, String password, Intent intent) {
-        UserRestClientImpl urci = new UserRestClientImpl();
+        UserRestClientImpl urci = UserRestClientImpl.getInstance();
         ResultReceiver rc = intent.getParcelableExtra("receiver");
         Bundle bundle = new Bundle();
         if (urci.getUserByName(name) != null) {

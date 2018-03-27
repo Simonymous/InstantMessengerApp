@@ -19,8 +19,8 @@ public class Updater {
     private GroupRestClientImpl grcl;
     private UserRestClientImpl urcl;
     public Updater() {
-        grcl = new GroupRestClientImpl();
-        urcl = new UserRestClientImpl();
+        grcl = GroupRestClientImpl.getInstance();
+        urcl = UserRestClientImpl.getInstance();
     }
 
     public void addGroup(View view, Group g) {

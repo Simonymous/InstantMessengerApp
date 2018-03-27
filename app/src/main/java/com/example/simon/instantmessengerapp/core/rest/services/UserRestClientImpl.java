@@ -28,9 +28,10 @@ import static com.example.simon.instantmessengerapp.core.rest.constants.UserRest
 /**
  * class representing the client rest interface to send server requests for users
  */                             //implements com.example.simon.instantmessengerapp.core.rest.interfaces.UserRestClient
-public class UserRestClientImpl  {
+public class UserRestClientImpl {
+    private static UserRestClientImpl instance = null;
 
-    private static final String URL = "http://192.168.2.103:4434";
+    private static final String URL = "http://192.168.178.28:4434";
     private static final String WEB_CONTEXT_PATH = "/im";
     private static final String USERS_PATH = "users";
     private static final String GROUPS_PATH = "groups";
@@ -44,7 +45,7 @@ public class UserRestClientImpl  {
     /**
      * default constructor
      */
-    public UserRestClientImpl() {
+    private UserRestClientImpl() {
         client = ClientBuilder.newClient().register(AndroidFriendlyFeature.class);
         response = null;
     }
@@ -429,6 +430,13 @@ public class UserRestClientImpl  {
         gSon = new GsonBuilder().create();
 
         return gSon.fromJson(json, Boolean.class);
+    }
+
+    public static UserRestClientImpl getInstance() {
+        if (instance == null) {
+            instance = new UserRestClientImpl();
+        }
+        return instance;
     }
 
 }
