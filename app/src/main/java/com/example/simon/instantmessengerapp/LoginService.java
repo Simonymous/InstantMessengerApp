@@ -3,12 +3,15 @@ package com.example.simon.instantmessengerapp;
 import android.annotation.SuppressLint;
 import android.app.IntentService;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.os.ResultReceiver;
 
 import com.example.simon.instantmessengerapp.core.UserAuthenticator;
 import com.example.simon.instantmessengerapp.core.rest.services.UserRestClientImpl;
+import com.example.simon.instantmessengerapp.database.DatabaseHelper;
 
 /**
  * Created by Manuel on 27.03.2018.
@@ -35,7 +38,6 @@ public class LoginService extends IntentService{
         }
     }
 
-
     @SuppressLint("RestrictedApi")
     private void handleActionLogin(String username, String password, Intent intent) {
         UserRestClientImpl urcl = UserRestClientImpl.getInstance();
@@ -46,7 +48,8 @@ public class LoginService extends IntentService{
             if (a.authenticateUser(username, password)) {
 
                 bundle.putBoolean("success", true);
-
+                SQLiteDatabase db = new DatabaseHelper(this).getReadableDatabase();
+                db.execSQL("delete from "+ DatabaseHelper.GROUP_TABLE_NAME);
             } else {
                 bundle.putBoolean("success", false);
                 bundle.putString("error", "Nutzername oder Passwort falsch!");

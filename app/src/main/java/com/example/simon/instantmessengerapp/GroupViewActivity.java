@@ -24,6 +24,7 @@ import android.widget.TextView;
 import com.example.simon.instantmessengerapp.database.adapter.GroupCursorAdapter;
 import com.example.simon.instantmessengerapp.database.DatabaseHelper;
 import com.example.simon.instantmessengerapp.gcmClasses.GcmRegister;
+import com.example.simon.instantmessengerapp.model.OwnUser;
 
 public class GroupViewActivity extends AppCompatActivity implements OnClickListener,OnItemClickListener,OnItemLongClickListener {
     private ListView groupListView;
