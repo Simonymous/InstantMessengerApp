@@ -36,6 +36,13 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ChatViewActivity" />
         <activity android:name=".RegisterActivity"></activity>
+        <service android:name=".LoginService"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.example.simon.instantmessengerapp.LoginService.ACTION_LOGIN"/>
+            </intent-filter>
+        </service>
 
         <!--<service android:name="[.MyInstanceIDService]" android:exported="false">-->
             <!--<intent-filter>-->

@@ -36,13 +36,15 @@ dependencies {
     // https://mvnrepository.com/artifact/com.sun.jersey/jersey-client
     //implementation group: 'com.sun.jersey', name: 'jersey-client', version: '1.9.1'
     // https://mvnrepository.com/artifact/javax.ws.rs/javax.ws.rs-api
-    implementation group: 'javax.ws.rs', name: 'javax.ws.rs-api', version: '2.0'
+    //implementation group: 'javax.ws.rs', name: 'javax.ws.rs-api', version: '2.0'
     // https://mvnrepository.com/artifact/com.google.android/android
     provided group: 'com.google.android', name: 'android', version: '4.1.1.4'
 
 
     implementation 'com.google.firebase:firebase-core:11.8.0'
     implementation "com.google.android.gms:play-services-gcm:11.8.0"
+
+    compile group: 'org.glassfish.jersey.core', name: 'jersey-client', version: '2.25'
 
 
 

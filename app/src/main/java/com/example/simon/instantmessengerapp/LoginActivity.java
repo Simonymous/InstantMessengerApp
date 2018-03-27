@@ -1,10 +1,13 @@
 package com.example.simon.instantmessengerapp;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.os.ResultReceiver;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -47,20 +50,12 @@ public class LoginActivity extends AppCompatActivity {
 
     /** Called when the user taps the Login button */
     public void startLogin(View view) {
-        UserRestClientImpl urcl = new UserRestClientImpl();
-        if (urcl.getUserByName(username.getText().toString()) != null || true) {
-            UserAuthenticator a = new UserAuthenticator();
-            if (a.authenticateUser(username.getText().toString(),
-                                   password.getText().toString()) || true) {
-                Intent intent = new Intent(this, GroupViewActivity.class);
-                startActivity(intent);
-            } else {
-                showFailedLogin("Nutzername oder Passwort falsch!");
-            }
-        } else {
-            showFailedLogin("Nutzer existiert nicht!");
-
-        }
+        Intent intent = new Intent(this, LoginService.class);
+        intent.putExtra(LoginService.PARAM_LOGIN_NAME, username.getText().toString());
+        intent.putExtra(LoginService.PARAM_LOGIN_PASSWORD, password.getText().toString());
+        intent.putExtra("receiver", new Receiver(new Handler()));
+        intent.setAction(LoginService.ACTION_LOGIN);
+        startService(intent);
     }
 
     public void startRegister(View view) {
@@ -90,6 +85,28 @@ public class LoginActivity extends AppCompatActivity {
 
         Toast toast = Toast.makeText(context, m, duration);
         toast.show();
+    }
+
+    private void startActivit() {
+        Intent intent = new Intent(this, GroupViewActivity.class);
+        startActivity(intent);
+    }
+
+    private class Receiver extends ResultReceiver {
+        @SuppressLint("RestrictedApi")
+        public Receiver(Handler handler) {
+            super(handler);
+        }
+
+        @SuppressLint("RestrictedApi")
+        @Override
+        protected void onReceiveResult(int resultCode, Bundle resultData) {
+            super.onReceiveResult(resultCode, resultData);
+            if (resultCode == 1) {
+                boolean success = resultData.getBoolean("success");
+                startActivit();
+            }
+        }
     }
 
 }

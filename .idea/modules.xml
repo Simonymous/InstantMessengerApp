@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/InstantMessengerApp.iml" filepath="$PROJECT_DIR$/InstantMessengerApp.iml" />
+      <module fileurl="file://C:\Users\Manuel\Documents\Android\InstantMessengerApp\InstantMessengerApp.iml" filepath="C:\Users\Manuel\Documents\Android\InstantMessengerApp\InstantMessengerApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://C:\Users\Manuel\Documents\Android\InstantMessengerApp\app\app.iml" filepath="C:\Users\Manuel\Documents\Android\InstantMessengerApp\app\app.iml" />
     </modules>
   </component>
 </project>

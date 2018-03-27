@@ -1,6 +1,7 @@
 package com.example.simon.instantmessengerapp.core.rest.services;
 
 
+import com.example.simon.instantmessengerapp.core.rest.AndroidFriendlyFeature;
 import com.example.simon.instantmessengerapp.core.rest.classes.JSONGroup;
 import com.example.simon.instantmessengerapp.core.rest.classes.JSONMessage;
 import com.example.simon.instantmessengerapp.core.rest.exceptions.GroupDoesNotExistException;
@@ -29,7 +30,7 @@ import static com.example.simon.instantmessengerapp.core.rest.constants.GroupRes
  */                                //implements com.example.simon.instantmessengerapp.core.rest.interfaces.GroupRestClient
 public class GroupRestClientImpl  {
 
-    private static final String URL = "http://localhost:4434";
+    private static final String URL = "http://192.168.178.28:4434";
     private static final String WEB_CONTEXT_PATH = "/im";
     private static final String GROUPS_PATH = "groups";
     private static final String USERS_PATH = "users";
@@ -43,7 +44,7 @@ public class GroupRestClientImpl  {
      * default constructor
      */
     public GroupRestClientImpl() {
-        client = ClientBuilder.newClient();
+        client = ClientBuilder.newClient().register(AndroidFriendlyFeature.class);
         response = null;
     }
 
