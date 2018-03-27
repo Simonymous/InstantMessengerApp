@@ -30,7 +30,7 @@ import static com.example.simon.instantmessengerapp.core.rest.constants.GroupRes
  */                                //implements com.example.simon.instantmessengerapp.core.rest.interfaces.GroupRestClient
 public class GroupRestClientImpl  {
 
-    private static final String URL = "http://192.168.178.28:4434";
+    private static final String URL = "http://192.168.2.102:4434";
     private static final String WEB_CONTEXT_PATH = "/im";
     private static final String GROUPS_PATH = "groups";
     private static final String USERS_PATH = "users";
