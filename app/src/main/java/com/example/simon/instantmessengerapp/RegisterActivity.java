@@ -27,18 +27,19 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     public void handleRegister(View view) {
-        UserRestClientImpl urcl = new UserRestClientImpl();
-        urcl.addUser(registerName.getText().toString(),registerPassword.getText().toString());
+        //Intent.extra........ TODO: Move to Service
+        //urcl.addUser(registerName.getText().toString(),registerPassword.getText().toString());
         finish();
     }
 
     public void handleCheck(View view) {
-        UserAuthenticator ua = new UserAuthenticator();
-      if(ua.doesUserExist(registerName.getText().toString())) {
-          showCheckToast("Nutzername nicht verfügbar!");
-      } else {
-          showCheckToast("Nutzername verfügbar!");
-      }
+        UserAuthenticator ua = new UserAuthenticator(); //TODO: Move to Service
+        //Intent.extra........
+//      if(ua.doesUserExist(registerName.getText().toString())) {
+//          showCheckToast("Nutzername nicht verfügbar!");
+//      } else {
+//          showCheckToast("Nutzername verfügbar!");
+//      }
     }
 
     public void handleCancel(View view) {
