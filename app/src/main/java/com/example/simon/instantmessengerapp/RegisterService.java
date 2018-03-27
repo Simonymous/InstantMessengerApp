@@ -32,10 +32,14 @@ public class RegisterService  extends IntentService{
         if(intent != null){
             final String action = intent.getAction();
             if (ACTION_REGISTER.equals(intent.getAction())) {
-                final String name = intent.getStringExtra(PARAM_LOGIN_NAME);
-                final String password = intent.getStringExtra(PARAM_LOGIN_PASSWORD);
-                //final String function = intent.getStringExtra(PARAM_FUNCTION);
-                //if (function = 1) --> handle .....
+                final String name = intent.getStringExtra(PARAM_REGISTER_NAME);
+                final String password = intent.getStringExtra(PARAM_REGISTER_PASSWORD);
+                final String function = intent.getStringExtra(PARAM_REGISTER_FUNCTION);
+                if (function.equals("check")) {
+                    handleActionCheck(name, password, intent);
+                } else {
+                    handleActionRegister(name, password, intent);
+                }
             }
         }
     }
@@ -44,8 +48,18 @@ public class RegisterService  extends IntentService{
 
 
     }
-
+    @SuppressLint("RestrictedApi")
     private void handleActionCheck(String name, String password, Intent intent) {
+        UserAuthenticator ua = new UserAuthenticator();
+        ResultReceiver rc = intent.getParcelableExtra("receiver");
+        Bundle bundle = new Bundle();
+        if (ua.doesUserExist((name))) {
+          bundle.putBoolean("succes",true);
+          bundle.putString("function","check");
+        } else {
+            bundle.putBoolean("error",false);
+            bundle.putString("error","Nutzername nicht verfügbar");
+        }
 
     }
 }

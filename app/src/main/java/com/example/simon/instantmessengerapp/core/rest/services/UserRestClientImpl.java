@@ -30,7 +30,7 @@ import static com.example.simon.instantmessengerapp.core.rest.constants.UserRest
  */                             //implements com.example.simon.instantmessengerapp.core.rest.interfaces.UserRestClient
 public class UserRestClientImpl  {
 
-    private static final String URL = "http://192.168.2.102:4434";
+    private static final String URL = "http://192.168.2.103:4434";
     private static final String WEB_CONTEXT_PATH = "/im";
     private static final String USERS_PATH = "users";
     private static final String GROUPS_PATH = "groups";

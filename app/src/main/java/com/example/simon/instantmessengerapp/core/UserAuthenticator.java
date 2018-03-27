@@ -31,7 +31,7 @@ public class UserAuthenticator {
     public boolean authenticateUser(String username, String password) {
         Log.i("authetiii","authetificateUser");
         User user = urci.getTheUserByName(username);
-        Log.i("authetiii","user" + user.getUsername());
+        //Log.i("authetiii","user" + user.getUsername());
         if (user == null) {
             return false;
         } else {
