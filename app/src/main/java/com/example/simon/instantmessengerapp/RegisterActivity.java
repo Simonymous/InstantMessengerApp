@@ -78,16 +78,16 @@ public class RegisterActivity extends AppCompatActivity {
         protected void onReceiveResult(int resultCode, Bundle resultData) {
             super.onReceiveResult(resultCode, resultData);
             if (resultCode == 1) {
-//                boolean success = resultData.getBoolean("success");
-//                if(success) startActivit();
-//                else showFailedLogin(resultData.getString("error"));
                 if(resultData.getBoolean("success")){
                     if(resultData.getString("function").equals("register")){
-
+                        Toast.makeText(getApplicationContext(), "Erfolgreich Registriert", Toast.LENGTH_LONG).show();
+                        returnToLogin();
                     }
                     if(resultData.getString("function").equals("check")){
-
+                        Toast.makeText(getApplicationContext(), "Nutzername ist verfügbar", Toast.LENGTH_LONG).show();
                     }
+                } else {
+                    Toast.makeText(getApplicationContext(), resultData.getString("error"), Toast.LENGTH_LONG).show();
                 }
             }
         }
