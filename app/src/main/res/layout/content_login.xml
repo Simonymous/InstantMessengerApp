@@ -33,7 +33,7 @@
             tools:layout_editor_absoluteY="150dp" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/buttonL"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="startLogin"
@@ -42,7 +42,7 @@
             tools:layout_editor_absoluteY="240dp" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/buttonR"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="startRegister"
