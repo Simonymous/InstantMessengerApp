@@ -1,13 +1,11 @@
 package com.example.simon.instantmessengerapp;
 
+import android.annotation.SuppressLint;
 import android.app.IntentService;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.ResultReceiver;
 import android.support.annotation.Nullable;
-import android.util.Log;
-import android.widget.Toast;
+import android.support.v4.os.ResultReceiver;
 
 import com.example.simon.instantmessengerapp.core.UserAuthenticator;
 import com.example.simon.instantmessengerapp.core.rest.services.UserRestClientImpl;
@@ -37,35 +35,25 @@ public class LoginService extends IntentService{
         }
     }
 
+    @SuppressLint("RestrictedApi")
     private void handleActionLogin(String username, String password, Intent intent) {
-        Log.i("ttt","handle login");
         UserRestClientImpl urcl = new UserRestClientImpl();
+        ResultReceiver rc = intent.getParcelableExtra("receiver");
+        Bundle bundle = new Bundle();
         if (urcl.getUserByName(username) != null) {
-            Log.i("ttt","username not null");
             UserAuthenticator a = new UserAuthenticator();
             if (a.authenticateUser(username, password)) {
-                Log.i("ttt","user is authetificated");
-                ResultReceiver rc = (ResultReceiver) intent.getParcelableExtra("receiver");
-                Bundle bundle = new Bundle();
+
                 bundle.putBoolean("success", true);
-                rc.send(1, bundle);
-//                Intent intent = new Intent(, GroupViewActivity.class);
-//                startActivity(intent);
+
             } else {
-                Log.i("ttt","password falsch");
-                showFailedLogin("Nutzername oder Passwort falsch!");
+                bundle.putBoolean("success", false);
+                bundle.putString("error", "Nutzername oder Passwort falsch!");
             }
         } else {
-            showFailedLogin("Nutzer existiert nicht!");
-
+            bundle.putBoolean("success", false);
+            bundle.putString("error", "Nutzername existiert nicht!");
         }
-    }
-
-    public void showFailedLogin(String m) {
-        Context context = getApplicationContext();
-        int duration = Toast.LENGTH_SHORT;
-
-        Toast toast = Toast.makeText(context, m, duration);
-        toast.show();
+        rc.send(1, bundle);
     }
 }

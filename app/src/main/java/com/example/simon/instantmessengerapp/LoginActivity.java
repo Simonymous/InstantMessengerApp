@@ -104,7 +104,8 @@ public class LoginActivity extends AppCompatActivity {
             super.onReceiveResult(resultCode, resultData);
             if (resultCode == 1) {
                 boolean success = resultData.getBoolean("success");
-                startActivit();
+                if(success) startActivit();
+                else showFailedLogin(resultData.getString("error"));
             }
         }
     }
