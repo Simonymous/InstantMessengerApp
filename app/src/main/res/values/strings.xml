@@ -3,4 +3,7 @@
     <string name="title_activity_login">LoginActivity</string>
     <string name="title_activity_group_view">GroupViewActivity</string>
     <string name="gmc_register">GcmRegister</string>
+    <string name="registrieren">Registrieren</string>
+    <string name="name">Name</string>
+    <string name="passwort">Passwort</string>
 </resources>
