@@ -6,80 +6,64 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.simon.instantmessengerapp.LoginActivity"
-    tools:showIn="@layout/activity_login">
+    >
 
 
     <EditText
         android:id="@+id/editTextUsername"
-        android:layout_width="200dp"
-        android:layout_height="30dp"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
         android:layout_alignParentTop="true"
         android:layout_alignStart="@+id/editTextPassword"
         android:layout_marginTop="227dp"
         android:background="@color/colorPrimaryDark"
         android:ems="10"
+        android:padding="10dp"
         android:hint="@string/name"
         android:inputType="textPersonName"
-        android:textColor="#FFF"
-        android:textSize="24sp" />
+        android:textColor="@color/white"/>
 
     <EditText
         android:id="@+id/editTextPassword"
-        android:layout_width="200dp"
-        android:layout_height="30dp"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
         android:layout_below="@+id/editTextUsername"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="40dp"
         android:background="@color/colorPrimaryDark"
         android:ems="10"
+        android:padding="10dp"
         android:hint="@string/passwort"
         android:inputType="textPassword"
-        android:textColor="#FFF" />
+        android:textColor="@color/white"/>
 
-
-    <android.support.v7.widget.CardView
+    <Button
+        android:id="@+id/buttonL"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:layout_below="@+id/editTextPassword"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
-        app:cardCornerRadius="25dp"
-        app:cardElevation="10dp"
+        android:layout_marginBottom="85dp"
+        android:background="@drawable/button_bg_rounded_corners"
         android:onClick="startLogin"
-        android:background="@color/colorPrimaryDark"
-        android:id="@+id/buttonL">
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-            <TextView
-                android:id="@+id/text"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:text="LogIn"
-                android:textAlignment="center"
-                android:textColor="#000"
-                android:textSize="24sp"
-                tools:ignore="HardcodedText" />
+        android:padding="15dp"
+        android:text="@string/login"
+        android:textColor="@color/white"/>
 
-        </RelativeLayout>
-
-
-
-    </android.support.v7.widget.CardView>
 
     <TextView
         android:id="@+id/buttonR"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/buttonL"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
+        android:layout_marginBottom="41dp"
         android:onClick="startRegister"
         android:text="@string/registrieren"
-        android:textColor="#FFF" />
+        android:textColor="#FFF"
+        android:textSize="18sp" />
+
+
 
 </RelativeLayout>

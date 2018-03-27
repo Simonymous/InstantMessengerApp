@@ -6,4 +6,7 @@
     <string name="registrieren">Registrieren</string>
     <string name="name">Benutzername</string>
     <string name="passwort">Passwort</string>
+    <string name="check">Check</string>
+    <string name="abbrechen">Abbrechen</string>
+    <string name="login">LogIn</string>
 </resources>
