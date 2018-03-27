@@ -35,6 +35,7 @@ public class LoginService extends IntentService{
         }
     }
 
+
     @SuppressLint("RestrictedApi")
     private void handleActionLogin(String username, String password, Intent intent) {
         UserRestClientImpl urcl = new UserRestClientImpl();

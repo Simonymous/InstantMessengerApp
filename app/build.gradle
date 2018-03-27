@@ -17,7 +17,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    buildToolsVersion '26.0.2'
+    buildToolsVersion '27.0.3'
 }
 
 dependencies {
@@ -38,20 +38,13 @@ dependencies {
     // https://mvnrepository.com/artifact/javax.ws.rs/javax.ws.rs-api
     //implementation group: 'javax.ws.rs', name: 'javax.ws.rs-api', version: '2.0'
     // https://mvnrepository.com/artifact/com.google.android/android
-    provided group: 'com.google.android', name: 'android', version: '4.1.1.4'
-
-
+    provided 'com.google.android:android:4.1.1.4'
     implementation 'com.google.firebase:firebase-core:11.8.0'
-    implementation "com.google.android.gms:play-services-gcm:11.8.0"
-
-    compile group: 'org.glassfish.jersey.core', name: 'jersey-client', version: '2.25'
-
-
-
+    implementation 'com.google.android.gms:play-services-gcm:11.8.0'
+    compile 'org.glassfish.jersey.core:jersey-client:2.25'
     configurations {
         compile.exclude group: 'javax.inject', module: 'javax.inject'
     }
-
     repositories {
         mavenLocal()
     }
