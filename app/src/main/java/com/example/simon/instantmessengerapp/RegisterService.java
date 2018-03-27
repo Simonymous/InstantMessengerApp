@@ -18,9 +18,10 @@ import com.example.simon.instantmessengerapp.core.rest.services.UserRestClientIm
 
 public class RegisterService  extends IntentService{
 
-    public static final String ACTION_LOGIN = "com.example.simon.instantmessengerapp.action.LOGIN";
-    public static final String PARAM_LOGIN_NAME = "com.example.simon.instantmessengerapp.extra.LOGIN_NAME";
-    public static final String PARAM_LOGIN_PASSWORD = "com.example.simon.instantmessengerapp.extra.LOGIN_PASSWORD";
+    public static final String ACTION_REGISTER = "com.example.simon.instantmessengerapp.action.REGISTER";
+    public static final String PARAM_REGISTER_NAME = "com.example.simon.instantmessengerapp.extra.REGISTER_NAME";
+    public static final String PARAM_REGISTER_PASSWORD = "com.example.simon.instantmessengerapp.extra.REGISTER_PASSWORD";
+    public static final String PARAM_REGISTER_FUNCTION = "com.example.simon.instantmessengerapp.extra.REGISTER_FUNCTION";
 
     public RegisterService(){
         super("RegisterService");
@@ -30,7 +31,7 @@ public class RegisterService  extends IntentService{
         //TODO: Get funtction (Check or Register)
         if(intent != null){
             final String action = intent.getAction();
-            if (ACTION_LOGIN.equals(intent.getAction())) {
+            if (ACTION_REGISTER.equals(intent.getAction())) {
                 final String name = intent.getStringExtra(PARAM_LOGIN_NAME);
                 final String password = intent.getStringExtra(PARAM_LOGIN_PASSWORD);
                 //final String function = intent.getStringExtra(PARAM_FUNCTION);
