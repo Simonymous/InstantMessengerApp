@@ -65,7 +65,7 @@ public class GroupViewService extends IntentService{
                     Log.i("iii", "result in null neue gruppe");
                     Group group = grci.getGroupById(i.toString());
                     Log.i("iii", "group name: " +group.getGroupName());
-                    new Updater().addGroup(getApplicationContext(), group);
+                    new Updater().addLocalGroup(getApplicationContext(), group);
                     Bundle bundle = new Bundle();
                     bundle.putBoolean("success", true);
                     rs.send(1, bundle);

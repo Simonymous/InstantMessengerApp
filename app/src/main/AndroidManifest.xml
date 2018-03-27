@@ -2,7 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.simon.instantmessengerapp">
 
-    <permission android:name="com.example.simon.instantmessengerapp.permission.C2D_MESSAGE" android:protectionLevel="signature" />
+    <permission
+        android:name="com.example.simon.instantmessengerapp.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
 
     <uses-permission android:name="com.something.app.permission.C2D_MESSAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -36,45 +38,66 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ChatViewActivity" />
         <activity android:name=".RegisterActivity"></activity>
-        <service android:name=".LoginService"
+
+        <service
+            android:name=".LoginService"
             android:enabled="true"
             android:exported="false">
             <intent-filter>
-                <action android:name="com.example.simon.instantmessengerapp.LoginService.ACTION_LOGIN"/>
+                <action android:name="com.example.simon.instantmessengerapp.LoginService.ACTION_LOGIN" />
             </intent-filter>
         </service>
-        <service android:name=".RegisterService"
+        <service
+            android:name=".RegisterService"
             android:enabled="true"
             android:exported="false">
             <intent-filter>
-                <action android:name="com.example.simon.instantmessengerapp.RegisterService.ACTION_Register"/>
+                <action android:name="com.example.simon.instantmessengerapp.RegisterService.ACTION_Register" />
             </intent-filter>
         </service>
-        <service android:name=".GroupViewService"
+        <service
+            android:name=".GroupViewService"
             android:enabled="true"
             android:exported="false">
             <intent-filter>
-                <action android:name="com.example.simon.instantmessengerapp.GroupViewService.ACTION_POLLING"/>
+                <action android:name="com.example.simon.instantmessengerapp.GroupViewService.ACTION_POLLING" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".ChatViewService"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.example.simon.instantmessengerapp.ChatViewService.ACTION_POLLING" />
+
+            </intent-filter>
+        </service>
+        <service android:name=".PostMessageService"
+            android:exported="false"
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="com.example.simon.instantmessengerapp.PostMessageService.ACTION_POST_MESSAGE" />
             </intent-filter>
         </service>
         <!--<service android:name="[.MyInstanceIDService]" android:exported="false">-->
-            <!--<intent-filter>-->
-                <!--<action android:name="com.google.android.gms.iid.InstanceID"/>-->
-            <!--</intent-filter>-->
+        <!--<intent-filter>-->
+        <!--<action android:name="com.google.android.gms.iid.InstanceID"/>-->
+        <!--</intent-filter>-->
         <!--</service>-->
 
         <receiver
             android:name="com.google.android.gms.gcm.GcmReceiver"
             android:exported="true"
-            android:permission="com.google.android.c2dm.permission.SEND" >
+            android:permission="com.google.android.c2dm.permission.SEND">
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
                 <category android:name="com.example.gcm" />
             </intent-filter>
         </receiver>
+
         <service
             android:name="gcmClasses.MyGcmListenerService"
-            android:exported="false" >
+            android:exported="false">
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
             </intent-filter>
@@ -89,13 +112,11 @@
 
         <service
             android:name=".gcmClasses.GcmRegister"
-            android:label="@string/gmc_register"
-            >
-        </service>
+            android:label="@string/gmc_register"></service>
 
         <!--<service-->
-            <!--android:name="gcm.play.android.samples.com.gcmquickstart.RegistrationIntentService"-->
-            <!--android:exported="false">-->
+        <!--android:name="gcm.play.android.samples.com.gcmquickstart.RegistrationIntentService"-->
+        <!--android:exported="false">-->
         <!--</service>-->
 
     </application>

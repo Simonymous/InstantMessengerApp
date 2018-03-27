@@ -20,6 +20,7 @@ import android.support.v4.os.ResultReceiver;
 import com.example.simon.instantmessengerapp.core.rest.services.GroupRestClientImpl;
 import com.example.simon.instantmessengerapp.database.DatabaseHelper;
 import com.example.simon.instantmessengerapp.database.adapter.MessageCursorAdapter;
+import com.example.simon.instantmessengerapp.model.OwnUser;
 import com.example.simon.instantmessengerapp.model.classes.MessageImpl;
 
 public class ChatViewActivity extends AppCompatActivity {
@@ -37,8 +38,9 @@ public class ChatViewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_chat_view);
 
         Intent intentA = new Intent(this, ChatViewService.class);
-        intent.putExtra("receiver", new Receiver(new Handler()));
-        intent.putExtra("groupID", groupId);
+        intentA.putExtra("receiver", new Receiver(new Handler()));
+        intentA.putExtra("groupID", groupId);
+        intentA.setAction(ChatViewService.ACTION_POLLING);
         startService(intentA);
 
         messageListView = (ListView) findViewById(R.id.chatListview);
@@ -54,14 +56,17 @@ public class ChatViewActivity extends AppCompatActivity {
     }
 
     public void sendMessage(View view) {
-        GroupRestClientImpl grcl = GroupRestClientImpl.getInstance();
+        Intent intent = new Intent(this, PostMessageService.class);
 
-        MessageImpl msg = new MessageImpl();
-        msg.setContent(messageEt.getText().toString());
-        msg.setGroup(Integer.parseInt(groupId));
-        msg.setUser(1); //TODO: Set id for authenticated user
 
-        grcl.postMessage(msg);
+
+        intent.setAction(PostMessageService.ACTION_POST_MESSAGE);
+        intent.putExtra("content", messageEt.getText().toString());
+        intent.putExtra("group", groupId);
+        startService(intent);
+
+
+        //grcl.postMessage(msg);
 //        SQLiteDatabase db = new DatabaseHelper(view.getContext()).getReadableDatabase();
 //        ContentValues values = new ContentValues();
 //        values.put(DatabaseHelper.MESSAGE_CONTENT_FIELD_NAME, messageEt.getText().toString());
@@ -69,7 +74,7 @@ public class ChatViewActivity extends AppCompatActivity {
 //        values.put(DatabaseHelper.MESSAGE_SENDER_FIELD_NAME, 1); //TODO: Do for own ID
 //        db.insert(DatabaseHelper.MESSAGE_TABLE_NAME, null, values);
 //        db.close();
-        populateListView();
+        //populateListView();
 
     }
 

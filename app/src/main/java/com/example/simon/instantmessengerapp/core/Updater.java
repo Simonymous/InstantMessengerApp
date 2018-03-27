@@ -24,7 +24,7 @@ public class Updater {
         urcl = UserRestClientImpl.getInstance();
     }
 
-    public void addGroup(Context c, Group g) {
+    public void addLocalGroup(Context c, Group g) {
 
         SQLiteDatabase db = new DatabaseHelper(c).getReadableDatabase();
         ContentValues groupValues = new ContentValues();
@@ -32,6 +32,17 @@ public class Updater {
         groupValues.put(DatabaseHelper.GROUP_ID_FIELD_NAME, g.getGroupId());
 
         db.insert(DatabaseHelper.GROUP_TABLE_NAME, null, groupValues);
+        db.close();
+    }
+
+    public void addLocalMessage(Context c, Message m) {
+        SQLiteDatabase db = new DatabaseHelper(c).getReadableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(DatabaseHelper.MESSAGE_ID_FIELD_NAME, (int) m.getMessageId());
+        values.put(DatabaseHelper.MESSAGE_CONTENT_FIELD_NAME, m.getContent());
+        values.put(DatabaseHelper.MESSAGE_GROUP_FIELD_NAME, m.getGroup());
+        values.put(DatabaseHelper.MESSAGE_SENDER_FIELD_NAME, m.getUser());
+        db.insert(DatabaseHelper.MESSAGE_TABLE_NAME, null, values);
         db.close();
     }
 
