@@ -26,6 +26,7 @@ public class RegisterService  extends IntentService{
     public RegisterService(){
         super("RegisterService");
     }
+
     @Override
     protected void onHandleIntent(@Nullable Intent intent) {
         //TODO: Get funtction (Check or Register)
@@ -50,16 +51,16 @@ public class RegisterService  extends IntentService{
     }
     @SuppressLint("RestrictedApi")
     private void handleActionCheck(String name, String password, Intent intent) {
-        UserAuthenticator ua = new UserAuthenticator();
+        UserRestClientImpl urcl = new UserRestClientImpl();
         ResultReceiver rc = intent.getParcelableExtra("receiver");
         Bundle bundle = new Bundle();
-        if (ua.doesUserExist((name))) {
+        if (urcl.getUserByName(name) == null) {
           bundle.putBoolean("succes",true);
           bundle.putString("function","check");
         } else {
             bundle.putBoolean("error",false);
             bundle.putString("error","Nutzername nicht verfügbar");
         }
-
+        rc.send(1, bundle);
     }
 }
