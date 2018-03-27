@@ -22,12 +22,12 @@ public class RegisterActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_register);
 
         registerName = findViewById(R.id.registerName);
         registerPassword = findViewById(R.id.registerPassword);
 
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
     }
 
     public void handleRegister(View view) {
